@@ -1,5 +1,6 @@
 from django.shortcuts import render
 import json
+from .models import ProductCategory, Product
 # Create your views here.
 
 
@@ -17,10 +18,27 @@ def index(request):
 
 
 def products(request):
+    related_products = [
+        {'product_img': 'img/product-11.jpg',
+            'name': 'Лампа подвесная модерн', 'description': 'Светит светом'},
+        {'product_img': 'img/product-21.jpg',
+            'name': 'Стул качественный', 'description': '4 ножки в комплекте'},
+        {'product_img': 'img/product-31.jpg',
+            'name': 'Лампа настольная', 'description': 'Излучает добро'}
+    ]
     prod_menu_links = [i for i in prods_menu['prod_menu']]
     return render(request, 'mainapp/products.html', context={'main_menu_links': main_menu_links,
-                                                             'prod_menu_links': prod_menu_links})
+                                                             'prod_menu_links': prod_menu_links,
+                                                             'related_products': related_products})
 
 
 def contact(request):
     return render(request, 'mainapp/contact.html', context={'main_menu_links': main_menu_links})
+
+def main(request):
+    title = 'главная'
+    
+    products = Product.objects.all()[:4]
+        
+    content = {'title': title, 'products': products}
+    return render(request, 'mainapp/index.html', content)
