@@ -17,7 +17,7 @@ def index(request):
     return render(request, 'mainapp/index.html', context={'main_menu_links': main_menu_links})
 
 
-def products(request):
+def products(request, pk=None):
     related_products = [
         {'product_img': 'img/product-11.jpg',
             'name': 'Лампа подвесная модерн', 'description': 'Светит светом'},
