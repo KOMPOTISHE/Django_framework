@@ -1,1 +1,1 @@
-# Django_framework
+# Django_GeekShop
